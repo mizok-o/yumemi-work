@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
 import { LineChart, Line, XAxis, CartesianGrid, Legend, YAxis } from "recharts";
 
-function App() {
+function Graph() {
 
   const data = [
     {
@@ -33,4 +32,4 @@ function App() {
   );
 }
 
-export default App;
+export default Graph;
