@@ -1,6 +1,6 @@
 import { LineChart, Line, XAxis, CartesianGrid, Legend, YAxis } from "recharts";
 
-function Graph() {
+function Graph(props) {
 
   const data = [
     {
@@ -13,21 +13,27 @@ function Graph() {
         name: '2012年', 株価: 2000
     }
   ]
+
+  const test = e => {
+    console.log(props.activePref)
+  }
+
   return (
     <div className="Graph">
       <p>グラフ</p>
+      <p onClick={() => test()}>jfoaerfj</p>
       <LineChart
-                width={700}
-                height={500}
-                data={data}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" interval="preserveStartEnd" />
-                <YAxis interval="preserveStartEnd" />
-                <Legend />
-                <Line type="monotone" dataKey="株価" stroke="#8884d8" activeDot={{ r: 8 }} />
-                {/* <Line type="monotone" dataKey="配当" stroke="#82ca9d" /> */}
-            </LineChart>
+        width={700}
+        height={500}
+        data={data}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" interval="preserveStartEnd" />
+        <YAxis interval="preserveStartEnd" />
+        <Legend />
+        <Line type="monotone" dataKey="株価" stroke="#8884d8" activeDot={{ r: 8 }} />
+        {/* <Line type="monotone" dataKey="配当" stroke="#82ca9d" /> */}
+      </LineChart>
     </div>
   );
 }
