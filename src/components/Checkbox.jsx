@@ -14,7 +14,10 @@ function Checkbox(props) {
             name="prefName"
             id={pref.prefName}
             value={pref.prefName}
-            onChange={() => changed(pref.prefCode)}
+            onChange={() => {
+              // console.log(pref);
+              changed(pref.prefCode)
+            }}
             />
           {pref.prefName}
         </label>
