@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>都道府県グラフ</h1>
+      <h1>都道府県別人口データ</h1>
       <Main />
     </div>
   );

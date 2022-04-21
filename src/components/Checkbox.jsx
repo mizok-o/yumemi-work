@@ -1,9 +1,10 @@
-// import { useEffect, useState } from "react";
 import '../checkbox.css'
 
 function Checkbox(props) {
 
   const {prefs, changed} = props
+
+
 
   const radioItems = prefs.map((pref, i) => {
     return (
@@ -14,6 +15,7 @@ function Checkbox(props) {
             name="prefName"
             id={pref.prefName}
             value={pref.prefName}
+            defaultChecked={i === 0}
             onChange={() => {
               // console.log(pref);
               changed(pref.prefCode)

@@ -5,8 +5,8 @@ import Graph from './Graph'
 function Main() {
 
   const [prefs, setPref] = useState([])
-  const [prefcode, setPrefcode] = useState([1, 2])
-  const [graphdata, setgraphdata] = useState([
+  const [prefcode, setPrefcode] = useState([1])
+  const [graphdata] = useState([
     {year: 1970},
     {year: 1980},
     {year: 1990},
@@ -18,7 +18,7 @@ function Main() {
   const option = {
     method: 'GET',
     headers: {
-      'x-api-key': 'atR4vyJ8zJ0T9pn3XlhkshErUixaz8NFkWKtbbrI',
+      'x-api-key': 'XCXAdsXiIRxpPR8HBP6ANFuEzB6LlgFi7Dvm6MMS',
       'Content-Type': 'application/json;charset=UTF-8'
     }
   }
@@ -29,15 +29,13 @@ function Main() {
       .then(data => {
         setPref(data.result)
       })
-  }, [])
+  }, [prefs])
 
   // デフォルトで表示するグラフ
 
   const defineGraphArray = (data, code) => {
-    console.log("-------START-------");
     data.splice(0, 2)
     data.splice(-5)
-
     const result = data.filter((e, i) => {
       return i % 2 === 0
     })
@@ -45,34 +43,45 @@ function Main() {
     for (let i = 0; i < graphdata.length; i++) {
       graphdata[i][`value${code}`] = result[i].value
     }
-
     console.log(graphdata);
-    console.log("-------FINISH-------");
   }
 
   useEffect(() =>{
-    for (let i = 0; i < prefcode.length; i++) {
-      fetch(`https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${prefcode[i]}`, option)
+
+    const index = prefcode.slice(-1)[0]
+    console.log(`${index}番のAPI呼び出し`);
+    console.log("prefcode");
+    console.log(prefcode);
+    fetch(`https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${index}`, option)
       .then(res => res.json())
       .then(data => {
-        console.log("総人口");
-        console.log(data.result.data[0].data);
         const graphDefault = data.result.data[0].data;
-        defineGraphArray(graphDefault, i)
+        console.log("changed");
+        console.log(graphDefault);
+        console.log(graphdata);
+        defineGraphArray(graphDefault, index)
       })
-    }
-  }, [])
+  }, [prefcode])
 
-  const ch = e => {
-      console.log(e);
+  // checkbox変更時にprefcodeの内容を変更させる
+  const ch = (e) => {
+    console.log(e);
+    const checkDuplicated = prefcode.indexOf(e)
+    console.log(checkDuplicated);
+
+    if(checkDuplicated === -1) {
       setPrefcode([...prefcode, e])
+    }else {
+      prefcode.splice(checkDuplicated, 1)
+      setPrefcode(prefcode)
     }
+
+  }
 
   return (
     <div className="main">
       <Checkbox prefs={prefs} changed={ch}  />
-      <Graph activePref={prefcode} data={graphdata} />
-      <p onClick={() => console.log(graphdata)}>あいう</p>
+      <Graph test={prefcode} data={graphdata} />
     </div>
   );
 }
