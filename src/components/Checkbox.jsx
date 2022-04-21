@@ -10,7 +10,7 @@ function Checkbox(props) {
       <div className="pref__item" key={i}>
         <label htmlFor={pref.prefName}>
           <input
-            type="radio"
+            type="checkbox"
             name="prefName"
             id={pref.prefName}
             value={pref.prefName}
