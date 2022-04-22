@@ -1,0 +1,22 @@
+.checkbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  font-size: 15px;
+}
+
+.pref__item {
+  width: 80px;
+}
+
+@media screen and (max-width: 750px) {
+  .checkbox {
+    margin-top: 8px;
+    gap: 1px;
+    font-size: 13px;
+  }
+
+  .pref__item {
+    width: 76px;
+  }
+}

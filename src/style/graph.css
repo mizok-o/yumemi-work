@@ -1,0 +1,23 @@
+.graph {
+  margin-left: -16px;
+}
+
+.recharts-wrapper {
+  margin: 32px 0 0;
+}
+
+.recharts-surface {
+  width: 744px;
+}
+
+@media screen and (max-width: 750px) {
+  .recharts-wrapper {
+    max-width: 350px;
+    max-height: 240px;
+    margin: 24px auto 0;
+  }
+  .recharts-surface {
+    width: 100%;
+    height: 240px;
+  }
+}

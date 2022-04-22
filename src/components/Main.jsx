@@ -18,7 +18,7 @@ function Main() {
   const option = {
     method: 'GET',
     headers: {
-      'x-api-key': 'XCXAdsXiIRxpPR8HBP6ANFuEzB6LlgFi7Dvm6MMS',
+      'x-api-key': 'S78z5hOcBzWTnOaLfEOMpJleLbJqsKpKpSjnjN7n',
       'Content-Type': 'application/json;charset=UTF-8'
     }
   }
@@ -43,31 +43,22 @@ function Main() {
     for (let i = 0; i < graphdata.length; i++) {
       graphdata[i][`value${code}`] = result[i].value
     }
-    console.log(graphdata);
   }
 
   useEffect(() =>{
-
     const index = prefcode.slice(-1)[0]
-    console.log(`${index}番のAPI呼び出し`);
-    console.log("prefcode");
-    console.log(prefcode);
+
     fetch(`https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${index}`, option)
       .then(res => res.json())
       .then(data => {
         const graphDefault = data.result.data[0].data;
-        console.log("changed");
-        console.log(graphDefault);
-        console.log(graphdata);
         defineGraphArray(graphDefault, index)
       })
   }, [prefcode])
 
   // checkbox変更時にprefcodeの内容を変更させる
   const ch = (e) => {
-    console.log(e);
     const checkDuplicated = prefcode.indexOf(e)
-    console.log(checkDuplicated);
 
     if(checkDuplicated === -1) {
       setPrefcode([...prefcode, e])
