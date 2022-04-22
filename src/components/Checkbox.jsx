@@ -3,7 +3,6 @@ import '../style/checkbox.css'
 function Checkbox(props) {
 
   const {prefs, changed} = props
-  console.log(props.prefs);
 
   const radioItems = prefs.map((pref, i) => {
     return (

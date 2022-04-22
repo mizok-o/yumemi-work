@@ -15,24 +15,15 @@ function Main() {
     {year: 2020}
   ])
 
-  const option = {
-    method: 'GET',
-    headers: {
-      'x-api-key': 'S78z5hOcBzWTnOaLfEOMpJleLbJqsKpKpSjnjN7n',
-      'Content-Type': 'application/json;charset=UTF-8'
-    }
-  }
-
   useEffect(() =>{
-    fetch('https://opendata.resas-portal.go.jp/api/v1/prefectures', option)
+    fetch('http://localhost:8000/prefs')
       .then(res => res.json())
       .then(data => {
         setPref(data.result)
       })
   }, [prefs])
 
-  // デフォルトで表示するグラフ
-
+  // グラフに表示するデータに加工する
   const defineGraphArray = (data, code) => {
     data.splice(0, 2)
     data.splice(-5)
@@ -48,7 +39,7 @@ function Main() {
   useEffect(() =>{
     const index = prefcode.slice(-1)[0]
 
-    fetch(`https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?cityCode=-&prefCode=${index}`, option)
+    fetch('http://localhost:8000/graph')
       .then(res => res.json())
       .then(data => {
         const graphDefault = data.result.data[0].data;
